@@ -1,0 +1,165 @@
+body {
+	margin-top: 0px;
+	text-align:center;
+	margin-left: auto;
+	margin-right: auto;
+        width: 100%;
+        font-family: Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular;
+        font-size: 13px;
+}
+
+a {
+        color: #2E78A7;
+        text-decoration : underline;
+}
+a:hover {
+        color: #ee9a47;
+}
+div#page {
+	margin-left: auto;
+	margin-right: auto;
+	width: 85%;
+	text-align: left;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+div.header {
+	border-bottom: 1px solid #808080;
+        height: 82px;  /* img height (100px) + img margin */
+        color: #A96046;
+	width: 100%;
+	margin-top: 10px;
+}
+
+div.header-left {
+        float: left;
+        border: none;
+}
+
+div.header-right {
+	float:right;
+	border: none;
+}
+
+div.header img {
+	border: none;
+}
+
+div.refresh {
+	text-align: right;
+        border: none;
+}
+
+div.queue {
+	margin-top: 50px;
+	text-align: right;
+        border: none;
+}
+
+div.content {
+	width: 100%;
+	text-align:justify;
+}
+
+div.htable {
+        margin-top: 10px;
+        text-align:justify;
+	font-size: 16px;
+	color:#A96046;
+        font-weight:bold;
+}
+
+/* BEGIN TABLE CSS */
+div.table-base {
+        border: none;
+        margin: 0;
+        padding: 0;
+        width: auto;
+}
+
+div.table-row-hdr {
+        border: solid #000000 1px;
+        margin-top: 0;
+        margin-right: auto;
+        margin-bottom: 0;
+        margin-left: auto;
+        padding: 0;
+        text-align: center;
+        width: 100%;
+}
+
+div.table-row {
+        border-left: solid #000000 1px;
+        border-top: none;
+        border-right: solid #000000 1px;
+        border-bottom: solid #000000 1px;
+        margin-top: 0;
+        margin-right: auto;
+        margin-bottom: 0;
+        margin-left: auto;
+        padding: 0;
+        text-align: center;
+        width: 100%;
+}
+
+div.cal-small-layer {
+        border: none;
+        float: left;
+        margin: 0;
+        padding: 0;
+        width: 10%;
+	text-align: center;
+}
+
+div.cal-big-layer {
+        border: none;
+        float: left;
+        margin: 0;
+        padding: 0;
+        width: 70%;
+	text-align: left;
+}
+
+div.mem-small-layer {
+        border: none;
+        float: left;
+        margin: 0;
+        padding: 0;
+        width: 10%;
+        text-align: center;
+}
+
+div.mem-big-layer {
+        border: none;
+        float: left;
+        margin: 0;
+        padding: 0;
+        width: 35%;
+        text-align: left;
+}
+
+div.space-line {
+        clear: both;
+        margin: 0;
+        padding: 0;
+        width: auto;
+}
+
+h5.colhdr {
+        background: none #ffffcc;
+        border: none;
+        color: #993333;
+        font-weight: bold;
+        margin: 0;
+        padding: 0.3em 0.3em 0 0.3em;
+        width: auto;
+}
+
+p.text {
+        border: none;
+        margin: 0; padding: 0.3em 0.3em 0 0.3em;
+        text-indent: 0;
+        width: auto;
+}
+*/ END TABLE CSS */
