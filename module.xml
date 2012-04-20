@@ -1,0 +1,20 @@
+<module>
+	<rawname>QueueCallers</rawname>
+	<name>Queue Callers</name>
+	<version>0.1</version>
+	<type>setup</type>
+	<category>Reports</category>
+	<publisher>github.com/lgaetz/QueueCallers</publisher> 
+	<license>GPLv2+</license>
+	<description>Displays a list of queue agents and callers</description>
+	<changelog></changelog>
+	<menuitems>
+		<superfecta>Queue Callers</superfecta>
+	</menuitems>
+	<info>https://github.com/lgaetz/QueueCallers</info>
+	<location>https://github.com/lgaetz/QueueCallers</location>
+	<depends>
+		<module>core</module>
+		<module>queues</module>
+	</depends>
+</module>
