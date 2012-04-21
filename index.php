@@ -66,7 +66,7 @@ $members = getMembers($command);
       <div class="htable">
         Callers in queue<?php if(count($callers) > 1) { echo ' ('.count($callers).' total)'; } ?>:
       </div>
-
+<table>
       <div class="table-layer">
         <div class="table-row-hdr">
           <div class="cal-small-layer">
@@ -122,13 +122,13 @@ $members = getMembers($command);
 	}
 	?>
       </div>
-
+</table>
       <br /><br />
 
       <div class="htable">
         Logged in agents:
       </div>
-
+<table>
       <div class="table-layer">
         <div class="table-row-hdr">
           <div class="mem-big-layer">
@@ -160,6 +160,7 @@ $members = getMembers($command);
         </div>
 	<?php
 	for($i = 0; $i < count($members); $i++) {
+
 	?>
         <div class="table-row" onMouseOver="this.style.backgroundColor='#F9F9F9';" onMouseOut="this.style.backgroundColor='#FFFFFF';">
           <div class="mem-big-layer">
@@ -195,8 +196,8 @@ $members = getMembers($command);
       }
       ?>
     </div>
-
-    <br /><br />
+      </table>
+          <br /><br />
 
     <center>[<a href="http://www.gnu.org/licenses/gpl.html">GNU General Public License</a>] Copyright &copy; <?php echo date("Y"); ?> <a href="http://www.markinthedark.nl">Mark Veenstra</a></center>
 
