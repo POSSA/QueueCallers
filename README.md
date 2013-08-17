@@ -13,6 +13,10 @@ This project should install and run on PHP enabled web server with access to an 
 * chown and chmod the queuecallers folder and contents as necessary
 * If installing on a FreePBX 2.9 (or higher) server installation should be done. If running other versions, or a non standard install navigate to `/[webroot]/queuecallers/inc/defines.php` and edit with Asterisk server access credentials.
 
+## Usage
+* Navigate to: `[web_server_ip]/queuecallers`
+* From the dropdown menus select the page refresh rate and the Asterisk queue, that's it!
+
 ## More information
 Questions, feature requests, bug reports can be added to the issue tracker: https://github.com/POSSA/QueueCallers/issues
 
