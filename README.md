@@ -9,9 +9,9 @@ This project should install and run on PHP enabled web server with access to an 
 
 ## Installation
 * Download the latest version of the project archive from: https://github.com/POSSA/QueueCallers/releases
-* decompress the archive on the server to [webroot]/queuecallers
+* decompress the archive on the server to `[webroot]/queuecallers`
 * chown and chmod the queuecallers folder and contents as necessary
-* If installing on a FreePBX 2.9 (or higher) server installation should be done. If running other versions, or a non standard install navigate to `/[webroot]/queuecallers/inc/defines.php` and edit with Asterisk server access credentials.
+* If installing on a server running FreePBX 2.9 (or higher), installation should be finished. If running other versions, or a non standard install navigate to `/[webroot]/queuecallers/inc/defines.php` and edit with Asterisk server access credentials.
 
 ## Usage
 * Navigate to: `[web_server_ip]/queuecallers`
