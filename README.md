@@ -1,14 +1,27 @@
-QueueCallers
-============
+POSSA QueueCallers
+==================
 
-PHP Page for displaying Asterisk queue agents and callers
-Forked by lgaetz from:
-
+QueueCallers is a simple PHP Page for displaying Asterisk queue agents and callers. Initially developed by Mark Veenstra at markinthedark.nl and modifed slightly for FreePBX users.
 
 
-by Mark Veenstra <belgie@markinthedark.nl>
-================================================================
+## Compatibility
+This project should install and run on PHP enabled web server with access to an Asterisk server. The project is tested and streamlined for installation on a FreePBX server running FreePBX 2.9 or later.
 
+## Installation
+* Download the latest version of the project archive from: https://github.com/POSSA/QueueCallers/releases
+* decompress the archive on the server to [webroot]/queuecallers
+* chown and chmod the queuecallers folder and contents as necessary
+* If installing on a FreePBX 2.9 (or higher) server installation should be done. If running other versions, or a non standard install navigate to `/[webroot]/queuecallers/inc/defines.php` and edit with Asterisk server access credentials.
+
+## More information
+Questions, feature requests, bug reports can be added to the issue tracker: https://github.com/POSSA/QueueCallers/issues
+
+
+
+
+Original readme file from by Mark Veenstra <belgie@markinthedark.nl>
+
+```
 ** Background
         When I search the Internet there are better and more
 improved add-ons for Asterisk to list/show all callers and
@@ -41,3 +54,4 @@ Open your browser and point in to http://<asterisk_server>/queue_list/
 
 ** Credits
 Special thanks to everyone in the Asterisk community.
+```
