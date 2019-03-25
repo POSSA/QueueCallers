@@ -88,15 +88,15 @@ function getMembers($command) {
                 }
                 $x = 0;
                 for($i = ($mkeys[0] + 1); $i <= $goto; $i++) {
-			$name = ereg_replace("\(.*", "", $command[$i]);
+			$name = preg_replace("/\(.*/", "", $command[$i]);
 			$temp = str_replace($name, "", $command[$i]);
-			$source = substr(ereg_replace("\).*", "", $temp), 1);
-			$temp = ereg_replace(".*\) \(", "", $command[$i]);
-			$status = ereg_replace("\).*", "", $temp);
-			$temp = ereg_replace(".* has taken ", "", $command[$i]);
-			$calls = ereg_replace(" calls.*", "", $temp);
-			$temp = ereg_replace(".* \(last was ", "", $command[$i]);
-			$last = ereg_replace(" secs.*", "", $temp);
+			$source = substr(preg_replace("/\).*/", "", $temp), 1);
+			$temp = preg_replace("/.*\) \(/", "", $command[$i]);
+			$status = preg_replace("/\).*/", "", $temp);
+			$temp = preg_replace("/.* has taken /", "", $command[$i]);
+			$calls = preg_replace("/ calls.*/", "", $temp);
+			$temp = preg_replace("/.* \(last was /", "", $command[$i]);
+			$last = preg_replace("/ secs.*/", "", $temp);
 			if(preg_match("/[^0-9]/", $last)) { $last = "N/A"; } else { $last = sec2hms($last); }
 
                         $array[$x] = array();
