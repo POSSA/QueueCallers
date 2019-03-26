@@ -4,6 +4,12 @@ function resolveAsteriskCommand() {
 	if(isset($_POST['queue']) && trim($_POST['queue'])) {
 		$cli = str_replace("?", $_POST["queue"], ASCLI);
 		exec($cli, $output, $return_var);
+		//remove colors from CLI output
+		$output = preg_replace("/\x1b\[[0-9;]*[a-zA-Z]/", "", $output);
+                $output = preg_replace("/\x1b\[[0-9;]*[mGKH]/", "", $output);
+                $output = preg_replace("/\x1b\[[0-9;]*m/", "", $output);
+                $output = preg_replace("/\x1b\[[0-9;]*[mGKF]/", "", $output);
+		
 //		for($i=0; $i<=(count($output) - 3); $i++) {
 		for($i=0; $i<=(count($output) - 2); $i++) {          //changed by lcg to display all callers in queue
 			array_push($array, trim($output[$i]));
@@ -42,13 +48,13 @@ function getCallers($command) {
 		$x = 0;
 		for($i = ($ckeys[0] + 1); $i < $goto; $i++) {
 
-                        $no = ereg_replace(" .*", "", $command[$i]);
-                        $temp = ereg_replace("^[0-9]*\. ", "", $command[$i]);
-                        $cid = ereg_replace(" \(.*", "", $temp);
-                        $temp = ereg_replace(".* \(wait: ", "", $command[$i]);
-                        $wait = ereg_replace(",.*", "", $temp);
-                        $temp = ereg_replace(".*, prio: ", "", $command[$i]);
-                        $prio = ereg_replace("\).*", "", $temp);
+                        $no = preg_replace("/ .*/", "", $command[$i]);
+                        $temp = preg_replace("/^[0-9]*\. /", "", $command[$i]);
+                        $cid = preg_replace("/ \(.*/", "", $temp);
+                        $temp = preg_replace("/.* \(wait: /", "", $command[$i]);
+                        $wait = preg_replace("/,.*/", "", $temp);
+                        $temp = preg_replace("/.*, prio: /", "", $command[$i]);
+                        $prio = preg_replace("/\).*/", "", $temp);
 
 			$array[$x] = array();
 			$array[$x]["no"] = $no;
