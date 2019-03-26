@@ -42,13 +42,13 @@ function getCallers($command) {
 		$x = 0;
 		for($i = ($ckeys[0] + 1); $i < $goto; $i++) {
 
-                        $no = ereg_replace(" .*", "", $command[$i]);
-                        $temp = ereg_replace("^[0-9]*\. ", "", $command[$i]);
-                        $cid = ereg_replace(" \(.*", "", $temp);
-                        $temp = ereg_replace(".* \(wait: ", "", $command[$i]);
-                        $wait = ereg_replace(",.*", "", $temp);
-                        $temp = ereg_replace(".*, prio: ", "", $command[$i]);
-                        $prio = ereg_replace("\).*", "", $temp);
+                        $no = preg_replace('/ .*/', "", $command[$i]);
+                        $temp = preg_replace('/^[0-9]*\. /', "", $command[$i]);
+                        $cid = preg_replace('/ \(.*/', "", $temp);
+                        $temp = preg_replace('/.* \(wait: /', "", $command[$i]);
+                        $wait = preg_replace('/,.*/', "", $temp);
+                        $temp = preg_replace('/.*, prio: /', "", $command[$i]);
+                        $prio = preg_replace('/\).*/', "", $temp);
 
 			$array[$x] = array();
 			$array[$x]["no"] = $no;
@@ -88,25 +88,15 @@ function getMembers($command) {
                 }
                 $x = 0;
                 for($i = ($mkeys[0] + 1); $i <= $goto; $i++) {
-			$name = ereg_replace("\(.*", "", $command[$i]);
-			$temp = str_replace($name, "", $command[$i]);
-			$source = substr(ereg_replace("\).*", "", $temp), 1);
-			$temp = ereg_replace(".*\) \(", "", $command[$i]);
-			$status = ereg_replace("\).*", "", $temp);
-			$temp = ereg_replace(".* has taken ", "", $command[$i]);
-			$calls = ereg_replace(" calls.*", "", $temp);
-			$temp = ereg_replace(".* \(last was ", "", $command[$i]);
-			$last = ereg_replace(" secs.*", "", $temp);
-			if(preg_match("/[^0-9]/", $last)) { $last = "N/A"; } else { $last = sec2hms($last); }
-
+                	preg_match('/(.*)\ \(Local\/(\d+)(.*)\d+m(Unavailable|Not in use|Ringing|in use)(.*)taken (\d+|no) calls(.*)(was (\d+)|yet)/i', $command[$i], $m);
+                        $last = $m[6] == 'no' ? 'N/A' : sec2hms($m[9]);
                         $array[$x] = array();
-                        $array[$x]["name"] = trim($name);
-                        $array[$x]["source"] = trim($source);
-                        $array[$x]["status"] = trim($status);
-                        $array[$x]["calls"] = trim($calls);
+                        $array[$x]["name"] = trim($m[1]);
+                        $array[$x]["source"] = trim($m[2]);
+                        $array[$x]["status"] = trim($m[4]);
+                        $array[$x]["calls"] = trim($m[6]);
                         $array[$x]["last"] = trim($last);
                         $array[$x]["debug"] = trim($command[$i]);
-
                         $x++;
                 }
         }
