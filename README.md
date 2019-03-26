@@ -20,7 +20,8 @@ This project should install and run on PHP enabled web server with access to an 
 ## More information
 Questions, feature requests, bug reports can be added to the issue tracker: https://github.com/POSSA/QueueCallers/issues
 
-
+## License
+http://www.gnu.org/licenses/gpl.html
 
 
 Original readme file from by Mark Veenstra <belgie@markinthedark.nl>
