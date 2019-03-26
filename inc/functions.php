@@ -5,12 +5,12 @@ function resolveAsteriskCommand() {
 		$cli = str_replace("?", $_POST["queue"], ASCLI);
 		exec($cli, $output, $return_var);
 		//remove colors from CLI output
-		$output = preg_replace("/\x1b\[[0-9;]*[a-zA-Z]/", "", $output);
-                $output = preg_replace("/\x1b\[[0-9;]*[mGKH]/", "", $output);
-                $output = preg_replace("/\x1b\[[0-9;]*m/", "", $output);
-                $output = preg_replace("/\x1b\[[0-9;]*[mGKF]/", "", $output);
+    $output = preg_replace("/\x1b\[[0-9;]*[a-zA-Z]/", "", $output);
+    $output = preg_replace("/\x1b\[[0-9;]*[mGKH]/", "", $output);
+    $output = preg_replace("/\x1b\[[0-9;]*m/", "", $output);
+    $output = preg_replace("/\x1b\[[0-9;]*[mGKF]/", "", $output);
 		
-//		for($i=0; $i<=(count($output) - 3); $i++) {
+		//for($i=0; $i<=(count($output) - 3); $i++) {
 		for($i=0; $i<=(count($output) - 2); $i++) {          //changed by lcg to display all callers in queue
 			array_push($array, trim($output[$i]));
 		}
@@ -25,12 +25,12 @@ function resolveAsteriskCommand() {
 function getCallers($command) {
 	$array = array();
 	if(in_array(ASCLINOCAL, $command)) {
-		$array[0] = array();
-		$array[0]["no"] = "";
-                $array[0]["cid"] = "No callers yet!";
-                $array[0]["wait"] = "";
-                $array[0]["prio"] = "";
-                $array[0]["debug"] = "";
+      $array[0] = array();
+      $array[0]["no"] = "";
+      $array[0]["cid"] = "No callers yet!";
+      $array[0]["wait"] = "";
+      $array[0]["prio"] = "";
+      $array[0]["debug"] = "";
 	}
 	else {
 		$ckeys = array_keys($command, ASCLICAL);
@@ -47,14 +47,13 @@ function getCallers($command) {
 		}
 		$x = 0;
 		for($i = ($ckeys[0] + 1); $i < $goto; $i++) {
-
-                        $no = preg_replace("/ .*/", "", $command[$i]);
-                        $temp = preg_replace("/^[0-9]*\. /", "", $command[$i]);
-                        $cid = preg_replace("/ \(.*/", "", $temp);
-                        $temp = preg_replace("/.* \(wait: /", "", $command[$i]);
-                        $wait = preg_replace("/,.*/", "", $temp);
-                        $temp = preg_replace("/.*, prio: /", "", $command[$i]);
-                        $prio = preg_replace("/\).*/", "", $temp);
+			$no = preg_replace('/ .*/', "", $command[$i]);
+			$temp = preg_replace('/^[0-9]*\. /', "", $command[$i]);
+			$cid = preg_replace('/ \(.*/', "", $temp);
+			$temp = preg_replace('/.* \(wait: /', "", $command[$i]);
+			$wait = preg_replace('/,.*/', "", $temp);
+			$temp = preg_replace('/.*, prio: /', "", $command[$i]);
+			$prio = preg_replace('/\).*/', "", $temp);
 
 			$array[$x] = array();
 			$array[$x]["no"] = $no;
@@ -82,9 +81,9 @@ function getMembers($command) {
         }
         else {
                 $ckeys = array_keys($command, ASCLICAL);
-		if(trim($ckeys[0]) == "") {
-			$ckeys = array_keys($command, ASCLINOCAL);
-		}
+                if(trim($ckeys[0]) == "") {
+                  $ckeys = array_keys($command, ASCLINOCAL);
+                }
                 $mkeys = array_keys($command, ASCLIMEM);
                 if($ckeys[0] > $mkeys[0]) {
                         $goto = ($ckeys[0] - 1);
@@ -94,26 +93,28 @@ function getMembers($command) {
                 }
                 $x = 0;
                 for($i = ($mkeys[0] + 1); $i <= $goto; $i++) {
-			$name = preg_replace("/\(.*/", "", $command[$i]);
-			$temp = str_replace($name, "", $command[$i]);
-			$source = substr(preg_replace("/\).*/", "", $temp), 1);
-			$temp = preg_replace("/.*\) \(/", "", $command[$i]);
-			$status = preg_replace("/\).*/", "", $temp);
-			$temp = preg_replace("/.* has taken /", "", $command[$i]);
-			$calls = preg_replace("/ calls.*/", "", $temp);
-			$temp = preg_replace("/.* \(last was /", "", $command[$i]);
-			$last = preg_replace("/ secs.*/", "", $temp);
-			if(preg_match("/[^0-9]/", $last)) { $last = "N/A"; } else { $last = sec2hms($last); }
+                      $name = preg_replace("/\(.*/", "", $command[$i]);
+                      $temp = str_replace($name, "", $command[$i]);
+                      $source = substr(preg_replace("/\).*/", "", $temp), 1);
+                      $temp = preg_replace("/.*\) \(/", "", $command[$i]);
+                      $status = preg_replace("/\).*/", "", $temp);
+                      $temp = preg_replace("/.* has taken /", "", $command[$i]);
+                      $calls = preg_replace("/ calls.*/", "", $temp);
+                      //RESOLVING CONFLICT
+                      //$temp = preg_replace("/.* \(last was /", "", $command[$i]);
+                      //$last = preg_replace("/ secs.*/", "", $temp);
+                      //if(preg_match("/[^0-9]/", $last)) { $last = "N/A"; } else { $last = sec2hms($last); }
 
-                        $array[$x] = array();
-                        $array[$x]["name"] = trim($name);
-                        $array[$x]["source"] = trim($source);
-                        $array[$x]["status"] = trim($status);
-                        $array[$x]["calls"] = trim($calls);
-                        $array[$x]["last"] = trim($last);
-                        $array[$x]["debug"] = trim($command[$i]);
-
-                        $x++;
+                      preg_match('/(.*)\ \(Local\/(\d+)(.*)\d+m(Unavailable|Not in use|Ringing|in use)(.*)taken (\d+|no) calls(.*)(was (\d+)|yet)/i', $command[$i], $m);
+                      $last = $m[6] == 'no' ? 'N/A' : sec2hms($m[9]);
+                      $array[$x] = array();
+                      $array[$x]["name"] = trim($m[1]);
+                      $array[$x]["source"] = trim($m[2]);
+                      $array[$x]["status"] = trim($m[4]);
+                      $array[$x]["calls"] = trim($m[6]);
+                      $array[$x]["last"] = trim($last);
+                      $array[$x]["debug"] = trim($command[$i]);
+                      $x++;
                 }
         }
         return $array;
