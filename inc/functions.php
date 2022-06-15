@@ -93,7 +93,7 @@ function getMembers($command) {
                 }
                 $x = 0;
                 for($i = ($mkeys[0] + 1); $i <= $goto; $i++) {
-                      preg_match('/(.*)\ \(Local.*\/(\d+)(.*)(Unavailable|Not in use|Ringing|In use)(.*)taken (\d+|no) calls(.*)(was (\d+)|yet)/', $command[$i], $m);
+                      preg_match('/(.*)\ \(Local.*\/(\d+)(.*)(Unavailable|Not in use|Ringing|In use)(.*)taken (\d+|no) calls(.*)(last was (\d+)|yet)/', $command[$i], $m);
                       $last = $m[6] == 'no' ? 'N/A' : sec2hms($m[9]);
                       $array[$x] = array();
                       $array[$x]["name"] = trim($m[1]);
