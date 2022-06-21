@@ -1,4 +1,17 @@
 <?php
+function resolveChannelCaller($chan)
+{
+        $cli = str_replace("?", $chan, ASCID);
+        exec($cli, $output, $return_var);
+        //remove colors from CLI output
+        $output = preg_replace("/\x1b\[[0-9;]*[a-zA-Z]/", "", $output);
+        $output = preg_replace("/\x1b\[[0-9;]*[mGKH]/", "", $output);
+        $output = preg_replace("/\x1b\[[0-9;]*m/", "", $output);
+        $output = preg_replace("/\x1b\[[0-9;]*[mGKF]/", "", $output);
+        preg_match('/Caller ID:\s([\d\w]+)/', $output[5], $m);
+        return $m[1] ?? $chan;
+}
+
 function resolveAsteriskCommand() {
 	$array = array();
 	if(isset($_POST['queue']) && trim($_POST['queue'])) {
@@ -57,7 +70,7 @@ function getCallers($command) {
 
 			$array[$x] = array();
 			$array[$x]["no"] = $no;
-			$array[$x]["cid"] = $cid;
+			$array[$x]["cid"] = resolveChannelCaller($cid);
 			$array[$x]["wait"] = $wait;
 			$array[$x]["prio"] = $prio;
 			$array[$x]["debug"] = $command[$i];
