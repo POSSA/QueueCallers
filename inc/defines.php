@@ -27,6 +27,7 @@ define("ASSQLQUEUE","SELECT extension, descr FROM queues_config ORDER BY descr A
 
 /* Asterisk CLI command specifics */
 define("ASCLI","asterisk -rx 'queue show ?' | sed 1d");
+define("ASCID","asterisk -rx 'core show channel ?'");
 //define("ASCLI","asterisk -rx 'queue show ?'");
 define("ASCLINOMEM","No Members");
 define("ASCLINOCAL","No Callers");
